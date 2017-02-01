@@ -2,6 +2,16 @@
 
 ## irssi-google-translate.pl
 
+### Description
+
+Use Google Translation API to translate outgoing and incoming messages.
+
+This script can be used to allow people to converse in their native language ('live' mode) 
+or to support your understanding of others' languages by providing a local translation 
+('info' mode).
+
+Beware that usage of the Google Translation API is not free. Watch your consumption.
+
 ### Inspiration
 
 Initial inspiration from https://github.com/vovcacik/irssi-scripts/blob/master/translate.pl
