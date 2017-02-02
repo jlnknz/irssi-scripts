@@ -72,7 +72,7 @@ sub _google_translate {
 	my $source_lang;
 
 	# remove "nick: " part from the message
-	my ($nick) = $message =~ s/^([^ :]: )//;
+	my ($nick) = $message =~ s/^([^ :]+: )//;
 
 	my $ua = new LWP::UserAgent;
 	$ua->default_header('X-HTTP-Method-Override' => 'GET');
