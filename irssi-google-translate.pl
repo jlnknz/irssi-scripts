@@ -66,13 +66,13 @@ sub _error
 }
 
 # Returns translated $message, (detected) source language and target language.
-# @param $source_lang Language of the $message. Optional.
 # @param $target_lang Language to which translate the $message. Required.
-# copied from l
-# FIXME mention attribution
 sub _google_translate {
 	my ($message, $target_lang) = @_;
 	my $source_lang;
+
+	# remove "nick: " part from the message
+	my ($nick) = $message =~ s/^([^ :]: )//;
 
 	my $ua = new LWP::UserAgent;
 	$ua->default_header('X-HTTP-Method-Override' => 'GET');
@@ -91,6 +91,8 @@ sub _google_translate {
 		my $json = $response->decoded_content;
 		my $decoded = decode_json $json;
 		my $translation = $decoded->{'data'}->{'translations'}->[0]->{'translatedText'};
+		# put the nick back
+		$translation = $nick.$translation;
 		$source_lang = $decoded->{'data'}->{'translations'}->[0]->{'detectedSourceLanguage'} || $source_lang;
 		return $translation, $source_lang, $target_lang;
 	} else {
